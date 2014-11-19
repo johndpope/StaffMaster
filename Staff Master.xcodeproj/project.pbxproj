@@ -1,0 +1,547 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		175CFA321A17E91600BF8625 /* Staff@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 175CFA2E1A17E91600BF8625 /* Staff@2x.png */; };
+		175CFA331A17E91600BF8625 /* Note@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 175CFA2F1A17E91600BF8625 /* Note@2x.png */; };
+		175CFA341A17E91600BF8625 /* MidiTest.mid in Resources */ = {isa = PBXBuildFile; fileRef = 175CFA301A17E91600BF8625 /* MidiTest.mid */; };
+		175CFA351A17E91600BF8625 /* Clouds@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 175CFA311A17E91600BF8625 /* Clouds@2x.png */; };
+		175CFA481A17E99E00BF8625 /* TimeSignature.m in Sources */ = {isa = PBXBuildFile; fileRef = 175CFA361A17E99E00BF8625 /* TimeSignature.m */; };
+		175CFA491A17E99E00BF8625 /* MidiTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 175CFA381A17E99E00BF8625 /* MidiTrack.m */; };
+		175CFA4A1A17E99E00BF8625 /* MidiNote.m in Sources */ = {isa = PBXBuildFile; fileRef = 175CFA3A1A17E99E00BF8625 /* MidiNote.m */; };
+		175CFA4B1A17E99E00BF8625 /* MidiFileReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 175CFA3C1A17E99E00BF8625 /* MidiFileReader.m */; };
+		175CFA4C1A17E99E00BF8625 /* MidiFileException.m in Sources */ = {isa = PBXBuildFile; fileRef = 175CFA3E1A17E99E00BF8625 /* MidiFileException.m */; };
+		175CFA4D1A17E99E00BF8625 /* MidiFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 175CFA401A17E99E00BF8625 /* MidiFile.m */; };
+		175CFA4E1A17E99E00BF8625 /* MidiEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 175CFA421A17E99E00BF8625 /* MidiEvent.m */; };
+		175CFA4F1A17E99E00BF8625 /* IntArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 175CFA441A17E99E00BF8625 /* IntArray.m */; };
+		175CFA501A17E99E00BF8625 /* Array.m in Sources */ = {isa = PBXBuildFile; fileRef = 175CFA461A17E99E00BF8625 /* Array.m */; };
+		175CFA551A17E9AD00BF8625 /* MIDIUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 175CFA511A17E9AD00BF8625 /* MIDIUtility.m */; };
+		175CFA561A17E9AD00BF8625 /* AudioUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 175CFA531A17E9AD00BF8625 /* AudioUtility.m */; };
+		175CFA581A17EB5100BF8625 /* GrandStaffLine@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 175CFA571A17EB5100BF8625 /* GrandStaffLine@2x.png */; };
+		175CFA5B1A17FFBD00BF8625 /* TrebleClef@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 175CFA591A17FFBD00BF8625 /* TrebleClef@2x.png */; };
+		175CFA5C1A17FFBD00BF8625 /* BassClef@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 175CFA5A1A17FFBD00BF8625 /* BassClef@2x.png */; };
+		82D968611A15C83A0060604F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 82D968601A15C83A0060604F /* AppDelegate.m */; };
+		82D968631A15C83A0060604F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 82D968621A15C83A0060604F /* main.m */; };
+		82D968661A15C83A0060604F /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 82D968651A15C83A0060604F /* GameScene.m */; };
+		82D968681A15C83A0060604F /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 82D968671A15C83A0060604F /* GameScene.sks */; };
+		82D9686A1A15C83A0060604F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 82D968691A15C83A0060604F /* Images.xcassets */; };
+		82D9686D1A15C83A0060604F /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82D9686B1A15C83A0060604F /* MainMenu.xib */; };
+		82D968791A15C83A0060604F /* Staff_MasterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 82D968781A15C83A0060604F /* Staff_MasterTests.m */; };
+		82D9F85C1A19C7ED003318CD /* MidiFile.mid in Resources */ = {isa = PBXBuildFile; fileRef = 82D9F85B1A19C7ED003318CD /* MidiFile.mid */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		82D968731A15C83A0060604F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 82D968521A15C8390060604F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 82D968591A15C83A0060604F;
+			remoteInfo = "Staff Master";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		175CFA2E1A17E91600BF8625 /* Staff@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Staff@2x.png"; path = "Resources/Staff@2x.png"; sourceTree = "<group>"; };
+		175CFA2F1A17E91600BF8625 /* Note@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Note@2x.png"; path = "Resources/Note@2x.png"; sourceTree = "<group>"; };
+		175CFA301A17E91600BF8625 /* MidiTest.mid */ = {isa = PBXFileReference; lastKnownFileType = audio.midi; name = MidiTest.mid; path = Resources/MidiTest.mid; sourceTree = "<group>"; };
+		175CFA311A17E91600BF8625 /* Clouds@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Clouds@2x.png"; path = "Resources/Clouds@2x.png"; sourceTree = "<group>"; };
+		175CFA361A17E99E00BF8625 /* TimeSignature.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TimeSignature.m; path = Midi/TimeSignature.m; sourceTree = "<group>"; };
+		175CFA371A17E99E00BF8625 /* TimeSignature.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TimeSignature.h; path = Midi/TimeSignature.h; sourceTree = "<group>"; };
+		175CFA381A17E99E00BF8625 /* MidiTrack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MidiTrack.m; path = Midi/MidiTrack.m; sourceTree = "<group>"; };
+		175CFA391A17E99E00BF8625 /* MidiTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MidiTrack.h; path = Midi/MidiTrack.h; sourceTree = "<group>"; };
+		175CFA3A1A17E99E00BF8625 /* MidiNote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MidiNote.m; path = Midi/MidiNote.m; sourceTree = "<group>"; };
+		175CFA3B1A17E99E00BF8625 /* MidiNote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MidiNote.h; path = Midi/MidiNote.h; sourceTree = "<group>"; };
+		175CFA3C1A17E99E00BF8625 /* MidiFileReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MidiFileReader.m; path = Midi/MidiFileReader.m; sourceTree = "<group>"; };
+		175CFA3D1A17E99E00BF8625 /* MidiFileReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MidiFileReader.h; path = Midi/MidiFileReader.h; sourceTree = "<group>"; };
+		175CFA3E1A17E99E00BF8625 /* MidiFileException.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MidiFileException.m; path = Midi/MidiFileException.m; sourceTree = "<group>"; };
+		175CFA3F1A17E99E00BF8625 /* MidiFileException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MidiFileException.h; path = Midi/MidiFileException.h; sourceTree = "<group>"; };
+		175CFA401A17E99E00BF8625 /* MidiFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MidiFile.m; path = Midi/MidiFile.m; sourceTree = "<group>"; };
+		175CFA411A17E99E00BF8625 /* MidiFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MidiFile.h; path = Midi/MidiFile.h; sourceTree = "<group>"; };
+		175CFA421A17E99E00BF8625 /* MidiEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MidiEvent.m; path = Midi/MidiEvent.m; sourceTree = "<group>"; };
+		175CFA431A17E99E00BF8625 /* MidiEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MidiEvent.h; path = Midi/MidiEvent.h; sourceTree = "<group>"; };
+		175CFA441A17E99E00BF8625 /* IntArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IntArray.m; path = Midi/IntArray.m; sourceTree = "<group>"; };
+		175CFA451A17E99E00BF8625 /* IntArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IntArray.h; path = Midi/IntArray.h; sourceTree = "<group>"; };
+		175CFA461A17E99E00BF8625 /* Array.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Array.m; path = Midi/Array.m; sourceTree = "<group>"; };
+		175CFA471A17E99E00BF8625 /* Array.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Array.h; path = Midi/Array.h; sourceTree = "<group>"; };
+		175CFA511A17E9AD00BF8625 /* MIDIUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MIDIUtility.m; path = Utilities/MIDIUtility.m; sourceTree = "<group>"; };
+		175CFA521A17E9AD00BF8625 /* MIDIUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MIDIUtility.h; path = Utilities/MIDIUtility.h; sourceTree = "<group>"; };
+		175CFA531A17E9AD00BF8625 /* AudioUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AudioUtility.m; path = Utilities/AudioUtility.m; sourceTree = "<group>"; };
+		175CFA541A17E9AD00BF8625 /* AudioUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AudioUtility.h; path = Utilities/AudioUtility.h; sourceTree = "<group>"; };
+		175CFA571A17EB5100BF8625 /* GrandStaffLine@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "GrandStaffLine@2x.png"; path = "Resources/GrandStaffLine@2x.png"; sourceTree = "<group>"; };
+		175CFA591A17FFBD00BF8625 /* TrebleClef@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "TrebleClef@2x.png"; path = "Resources/TrebleClef@2x.png"; sourceTree = "<group>"; };
+		175CFA5A1A17FFBD00BF8625 /* BassClef@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "BassClef@2x.png"; path = "Resources/BassClef@2x.png"; sourceTree = "<group>"; };
+		82D9685A1A15C83A0060604F /* Staff Master.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Staff Master.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		82D9685E1A15C83A0060604F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		82D9685F1A15C83A0060604F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		82D968601A15C83A0060604F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		82D968621A15C83A0060604F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		82D968641A15C83A0060604F /* GameScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
+		82D968651A15C83A0060604F /* GameScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameScene.m; sourceTree = "<group>"; };
+		82D968671A15C83A0060604F /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
+		82D968691A15C83A0060604F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		82D9686C1A15C83A0060604F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		82D968721A15C83A0060604F /* Staff MasterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Staff MasterTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		82D968771A15C83A0060604F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		82D968781A15C83A0060604F /* Staff_MasterTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Staff_MasterTests.m; sourceTree = "<group>"; };
+		82D9F85B1A19C7ED003318CD /* MidiFile.mid */ = {isa = PBXFileReference; lastKnownFileType = audio.midi; name = MidiFile.mid; path = Resources/MidiFile.mid; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		82D968571A15C83A0060604F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		82D9686F1A15C83A0060604F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		17302CD81A16ED510027F60D /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				175CFA511A17E9AD00BF8625 /* MIDIUtility.m */,
+				175CFA521A17E9AD00BF8625 /* MIDIUtility.h */,
+				175CFA531A17E9AD00BF8625 /* AudioUtility.m */,
+				175CFA541A17E9AD00BF8625 /* AudioUtility.h */,
+			);
+			name = Utilities;
+			sourceTree = "<group>";
+		};
+		17302CD91A16EEE40027F60D /* Midi */ = {
+			isa = PBXGroup;
+			children = (
+				175CFA361A17E99E00BF8625 /* TimeSignature.m */,
+				175CFA371A17E99E00BF8625 /* TimeSignature.h */,
+				175CFA381A17E99E00BF8625 /* MidiTrack.m */,
+				175CFA391A17E99E00BF8625 /* MidiTrack.h */,
+				175CFA3A1A17E99E00BF8625 /* MidiNote.m */,
+				175CFA3B1A17E99E00BF8625 /* MidiNote.h */,
+				175CFA3C1A17E99E00BF8625 /* MidiFileReader.m */,
+				175CFA3D1A17E99E00BF8625 /* MidiFileReader.h */,
+				175CFA3E1A17E99E00BF8625 /* MidiFileException.m */,
+				175CFA3F1A17E99E00BF8625 /* MidiFileException.h */,
+				175CFA401A17E99E00BF8625 /* MidiFile.m */,
+				175CFA411A17E99E00BF8625 /* MidiFile.h */,
+				175CFA421A17E99E00BF8625 /* MidiEvent.m */,
+				175CFA431A17E99E00BF8625 /* MidiEvent.h */,
+				175CFA441A17E99E00BF8625 /* IntArray.m */,
+				175CFA451A17E99E00BF8625 /* IntArray.h */,
+				175CFA461A17E99E00BF8625 /* Array.m */,
+				175CFA471A17E99E00BF8625 /* Array.h */,
+			);
+			name = Midi;
+			sourceTree = "<group>";
+		};
+		17302CFB1A16FCAD0027F60D /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				82D9F85B1A19C7ED003318CD /* MidiFile.mid */,
+				175CFA591A17FFBD00BF8625 /* TrebleClef@2x.png */,
+				175CFA5A1A17FFBD00BF8625 /* BassClef@2x.png */,
+				175CFA571A17EB5100BF8625 /* GrandStaffLine@2x.png */,
+				175CFA2E1A17E91600BF8625 /* Staff@2x.png */,
+				175CFA2F1A17E91600BF8625 /* Note@2x.png */,
+				175CFA301A17E91600BF8625 /* MidiTest.mid */,
+				175CFA311A17E91600BF8625 /* Clouds@2x.png */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		82D968511A15C8390060604F = {
+			isa = PBXGroup;
+			children = (
+				82D9685C1A15C83A0060604F /* Staff Master */,
+				82D968751A15C83A0060604F /* Staff MasterTests */,
+				82D9685B1A15C83A0060604F /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		82D9685B1A15C83A0060604F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				82D9685A1A15C83A0060604F /* Staff Master.app */,
+				82D968721A15C83A0060604F /* Staff MasterTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		82D9685C1A15C83A0060604F /* Staff Master */ = {
+			isa = PBXGroup;
+			children = (
+				17302CFB1A16FCAD0027F60D /* Resources */,
+				17302CD91A16EEE40027F60D /* Midi */,
+				17302CD81A16ED510027F60D /* Utilities */,
+				82D9685F1A15C83A0060604F /* AppDelegate.h */,
+				82D968601A15C83A0060604F /* AppDelegate.m */,
+				82D968641A15C83A0060604F /* GameScene.h */,
+				82D968651A15C83A0060604F /* GameScene.m */,
+				82D968671A15C83A0060604F /* GameScene.sks */,
+				82D968691A15C83A0060604F /* Images.xcassets */,
+				82D9686B1A15C83A0060604F /* MainMenu.xib */,
+				82D9685D1A15C83A0060604F /* Supporting Files */,
+			);
+			path = "Staff Master";
+			sourceTree = "<group>";
+		};
+		82D9685D1A15C83A0060604F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				82D9685E1A15C83A0060604F /* Info.plist */,
+				82D968621A15C83A0060604F /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		82D968751A15C83A0060604F /* Staff MasterTests */ = {
+			isa = PBXGroup;
+			children = (
+				82D968781A15C83A0060604F /* Staff_MasterTests.m */,
+				82D968761A15C83A0060604F /* Supporting Files */,
+			);
+			path = "Staff MasterTests";
+			sourceTree = "<group>";
+		};
+		82D968761A15C83A0060604F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				82D968771A15C83A0060604F /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		82D968591A15C83A0060604F /* Staff Master */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 82D9687C1A15C83A0060604F /* Build configuration list for PBXNativeTarget "Staff Master" */;
+			buildPhases = (
+				82D968561A15C83A0060604F /* Sources */,
+				82D968571A15C83A0060604F /* Frameworks */,
+				82D968581A15C83A0060604F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Staff Master";
+			productName = "Staff Master";
+			productReference = 82D9685A1A15C83A0060604F /* Staff Master.app */;
+			productType = "com.apple.product-type.application";
+		};
+		82D968711A15C83A0060604F /* Staff MasterTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 82D9687F1A15C83A0060604F /* Build configuration list for PBXNativeTarget "Staff MasterTests" */;
+			buildPhases = (
+				82D9686E1A15C83A0060604F /* Sources */,
+				82D9686F1A15C83A0060604F /* Frameworks */,
+				82D968701A15C83A0060604F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				82D968741A15C83A0060604F /* PBXTargetDependency */,
+			);
+			name = "Staff MasterTests";
+			productName = "Staff MasterTests";
+			productReference = 82D968721A15C83A0060604F /* Staff MasterTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		82D968521A15C8390060604F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = MOSSTECH;
+				TargetAttributes = {
+					82D968591A15C83A0060604F = {
+						CreatedOnToolsVersion = 6.1;
+					};
+					82D968711A15C83A0060604F = {
+						CreatedOnToolsVersion = 6.1;
+						TestTargetID = 82D968591A15C83A0060604F;
+					};
+				};
+			};
+			buildConfigurationList = 82D968551A15C83A0060604F /* Build configuration list for PBXProject "Staff Master" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 82D968511A15C8390060604F;
+			productRefGroup = 82D9685B1A15C83A0060604F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				82D968591A15C83A0060604F /* Staff Master */,
+				82D968711A15C83A0060604F /* Staff MasterTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		82D968581A15C83A0060604F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				82D968681A15C83A0060604F /* GameScene.sks in Resources */,
+				175CFA321A17E91600BF8625 /* Staff@2x.png in Resources */,
+				175CFA5B1A17FFBD00BF8625 /* TrebleClef@2x.png in Resources */,
+				82D9F85C1A19C7ED003318CD /* MidiFile.mid in Resources */,
+				175CFA581A17EB5100BF8625 /* GrandStaffLine@2x.png in Resources */,
+				175CFA331A17E91600BF8625 /* Note@2x.png in Resources */,
+				82D9686A1A15C83A0060604F /* Images.xcassets in Resources */,
+				175CFA351A17E91600BF8625 /* Clouds@2x.png in Resources */,
+				175CFA5C1A17FFBD00BF8625 /* BassClef@2x.png in Resources */,
+				82D9686D1A15C83A0060604F /* MainMenu.xib in Resources */,
+				175CFA341A17E91600BF8625 /* MidiTest.mid in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		82D968701A15C83A0060604F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		82D968561A15C83A0060604F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				175CFA4C1A17E99E00BF8625 /* MidiFileException.m in Sources */,
+				82D968631A15C83A0060604F /* main.m in Sources */,
+				82D968661A15C83A0060604F /* GameScene.m in Sources */,
+				175CFA4F1A17E99E00BF8625 /* IntArray.m in Sources */,
+				175CFA4D1A17E99E00BF8625 /* MidiFile.m in Sources */,
+				175CFA561A17E9AD00BF8625 /* AudioUtility.m in Sources */,
+				82D968611A15C83A0060604F /* AppDelegate.m in Sources */,
+				175CFA491A17E99E00BF8625 /* MidiTrack.m in Sources */,
+				175CFA481A17E99E00BF8625 /* TimeSignature.m in Sources */,
+				175CFA551A17E9AD00BF8625 /* MIDIUtility.m in Sources */,
+				175CFA4E1A17E99E00BF8625 /* MidiEvent.m in Sources */,
+				175CFA501A17E99E00BF8625 /* Array.m in Sources */,
+				175CFA4B1A17E99E00BF8625 /* MidiFileReader.m in Sources */,
+				175CFA4A1A17E99E00BF8625 /* MidiNote.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		82D9686E1A15C83A0060604F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				82D968791A15C83A0060604F /* Staff_MasterTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		82D968741A15C83A0060604F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 82D968591A15C83A0060604F /* Staff Master */;
+			targetProxy = 82D968731A15C83A0060604F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		82D9686B1A15C83A0060604F /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				82D9686C1A15C83A0060604F /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		82D9687A1A15C83A0060604F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		82D9687B1A15C83A0060604F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		82D9687D1A15C83A0060604F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "Staff Master/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		82D9687E1A15C83A0060604F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "Staff Master/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		82D968801A15C83A0060604F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Staff MasterTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Staff Master.app/Contents/MacOS/Staff Master";
+			};
+			name = Debug;
+		};
+		82D968811A15C83A0060604F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Staff MasterTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Staff Master.app/Contents/MacOS/Staff Master";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		82D968551A15C83A0060604F /* Build configuration list for PBXProject "Staff Master" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				82D9687A1A15C83A0060604F /* Debug */,
+				82D9687B1A15C83A0060604F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		82D9687C1A15C83A0060604F /* Build configuration list for PBXNativeTarget "Staff Master" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				82D9687D1A15C83A0060604F /* Debug */,
+				82D9687E1A15C83A0060604F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		82D9687F1A15C83A0060604F /* Build configuration list for PBXNativeTarget "Staff MasterTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				82D968801A15C83A0060604F /* Debug */,
+				82D968811A15C83A0060604F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 82D968521A15C8390060604F /* Project object */;
+}
