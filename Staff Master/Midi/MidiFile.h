@@ -57,9 +57,11 @@
 @interface MidiFile : NSObject {
     NSString* filename;      /** The Midi file name */
     Array* events;           /** Array< Array<MidiEvent>> : the raw midi events */
+    Array* metaEvents;
     Array *tracks;           /** The tracks (MidiTrack) of the midifile that have notes */
     u_short trackmode;       /** 0 (single track), 1 (simultaneous tracks) 2 (independent tracks) */
     TimeSignature* time;     /** The time signature */
+    int keySignature;
     int quarternote;         /** The number of pulses per quarter note */
     int totalpulses;         /** The total length of the song, in pulses */
     BOOL trackPerChannel;    /** True if we've split each channel into a track */
@@ -68,45 +70,46 @@
 @property (nonatomic, readonly) NSString *filename;
 @property (nonatomic, readonly) Array *tracks;
 @property (nonatomic, readonly) TimeSignature *time;
+@property (nonatomic, readonly) int keySignature;
 @property (nonatomic, readonly) int totalpulses;
 
 -(id)initWithFile:(NSString*)path;
 -(Array*)readTrack:(MidiFileReader*)file;
--(IntArray*)guessMeasureLength;
+//-(IntArray*)guessMeasureLength;
 //-(BOOL)changeSound:(MidiOptions *)options toFile:(NSString*)filename;
 //-(Array*)applyOptionsToEvents:(MidiOptions *)options;
 //-(Array*)applyOptionsPerChannel:(MidiOptions *)options;
 //-(Array*)changeMidiNotes:(MidiOptions*)options;
--(int)endTime;
--(BOOL)hasLyrics;
+//-(int)endTime;
+//-(BOOL)hasLyrics;
 
-+(void)findHighLowNotes:(Array*)notes withMeasure:(int)measurelen startIndex:(int)startindex
-                        fromStart:(int)starttime toEnd:(int)endtime withHigh:(int*)high
-                        andLow:(int*)low;
+//+(void)findHighLowNotes:(Array*)notes withMeasure:(int)measurelen startIndex:(int)startindex
+//                        fromStart:(int)starttime toEnd:(int)endtime withHigh:(int*)high
+//                        andLow:(int*)low;
 
-+(void)findExactHighLowNotes:(Array*)notes startIndex:(int)startindex
-                        withStart:(int)starttime withHigh:(int*)high
-                        andLow:(int*)low; 
+//+(void)findExactHighLowNotes:(Array*)notes startIndex:(int)startindex
+//                        withStart:(int)starttime withHigh:(int*)high
+//                        andLow:(int*)low;
 
 //+(Array*)splitTrack:(MidiTrack *)track withMeasure:(int)measurelen;
 //+(Array*)splitChannels:(MidiTrack *)track withEvents:(Array*)events;
--(MidiTrack*) combineToSingleTrack:(Array *)tracks;
+//-(MidiTrack*) combineToSingleTrack:(Array *)tracks;
 
-+(Array*) combineToTwoTracks:(Array *)tracks withMeasure:(int)measurelen;
-+(void)checkStartTimes:(Array *)tracks;
-+(void)roundStartTimes:(Array *)tracks toInterval:(int)millisec  withTime:(TimeSignature*)time;
-+(void)roundDurations:(Array *)tracks withQuarter:(int)quarternote;
-+(void)shiftTime:(Array*)tracks byAmount:(int)amount;
-+(void)transpose:(Array*)tracks byAmount:(int)amount;
-+(BOOL)hasMultipleChannels:(MidiTrack*) track;
-+(NSArray*) instrumentNames;
+//+(Array*) combineToTwoTracks:(Array *)tracks withMeasure:(int)measurelen;
+//+(void)checkStartTimes:(Array *)tracks;
+//+(void)roundStartTimes:(Array *)tracks toInterval:(int)millisec  withTime:(TimeSignature*)time;
+//+(void)roundDurations:(Array *)tracks withQuarter:(int)quarternote;
+//+(void)shiftTime:(Array*)tracks byAmount:(int)amount;
+//+(void)transpose:(Array*)tracks byAmount:(int)amount;
+//+(BOOL)hasMultipleChannels:(MidiTrack*) track;
+//+(NSArray*) instrumentNames;
 
-+(int)getTrackLength:(Array*)events;
-+(BOOL)writeToFile:(NSString*)filename withEvents:(Array*)events andMode:(int)mode andQuarter:(int)quarter;
-+(Array*)cloneMidiEvents:(Array*)origlist;
-+(void) addTempoEvent:(Array*)eventlist withTempo:(int)tempo;
-+(Array*)startAtPauseTime:(int)pauseTime withEvents:(Array*)list;
-+(NSString*)titleName:(NSString*)filename;
+//+(int)getTrackLength:(Array*)events;
+//+(BOOL)writeToFile:(NSString*)filename withEvents:(Array*)events andMode:(int)mode andQuarter:(int)quarter;
+//+(Array*)cloneMidiEvents:(Array*)origlist;
+//+(void) addTempoEvent:(Array*)eventlist withTempo:(int)tempo;
+//+(Array*)startAtPauseTime:(int)pauseTime withEvents:(Array*)list;
+//+(NSString*)titleName:(NSString*)filename;
 
 @end
 

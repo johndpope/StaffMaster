@@ -140,7 +140,7 @@ static int intcmp(const void *v1, const void* v2) {
 - (IntArray *)initFromArray:(NSArray *)nsarray
 {
     //[self initWithCapacity:[nsarray count]];
-    int newCapacity = [nsarray count];
+    int newCapacity = (int)[nsarray count];
     assert(newCapacity >= 0);
     if (newCapacity == 0)
         newCapacity = 1;

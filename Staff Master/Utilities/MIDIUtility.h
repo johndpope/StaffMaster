@@ -7,12 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreMIDI/CoreMIDI.h>
 
 @interface MIDIUtility : NSObject
 
 @property (nonatomic, readwrite) Byte midiNote;
 
 
-+(void)setupDevice;
-
++(void)setupDeviceWithCallBack:(MIDIReadProc)callback;
++(void)processMessage: (const MIDIPacketList*) list;
++(int)getNoteNumber:(const MIDIPacketList *)list;
++(unsigned char)getMessageType:(const MIDIPacketList *)list;
 @end

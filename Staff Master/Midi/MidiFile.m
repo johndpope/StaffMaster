@@ -11,6 +11,7 @@
  */
 
 #import "MidiFile.h"
+#import "midiMeasure.h"
 #import <Foundation/NSAutoreleasePool.h>
 #include <stdlib.h>
 #include <fcntl.h>
@@ -154,12 +155,6 @@
  *           u3         - quarter note length in microseconds
  */
 
-
-
-
-
-
-
 /** @class MidiFile
  *
  * The MidiFile class contains the parsed data from the Midi File.
@@ -201,6 +196,7 @@
 
 @synthesize tracks;
 @synthesize time;
+@synthesize keySignature;
 @synthesize filename;
 @synthesize totalpulses;
 
@@ -221,6 +217,7 @@
     trackPerChannel = NO;
 
     MidiFileReader *file = [[MidiFileReader alloc] initWithFile:filename];
+    
     hdr = [file readAscii:4];
     if (strncmp(hdr, "MThd", 4) != 0) {
        
@@ -239,56 +236,19 @@
     int num_tracks = [file readShort];
     quarternote = [file readShort];
 
-
-    events = [Array new:num_tracks] ;
-    for (int tracknum = 0; tracknum < num_tracks; tracknum++) {
-        
-        Array *trackevents = [self readTrack:file];
-        MidiTrack *track = 
-          [[MidiTrack alloc] initWithEvents:trackevents andTrack:tracknum];
-        [events add:trackevents];
-        track.number = tracknum;
-        if ([track.notes count] > 0) {
-            [tracks add:track];
-        }
-        
-        MidiNote *last = [track.notes get:([track.notes count] -1) ];
-        if (totalpulses < last.startTime + last.duration) {
-            totalpulses = last.startTime + last.duration;
-        }
-        
-        
-    }
-
-    /* Get the length of the song in pulses */
-//    for (int tracknum = 0; tracknum < [tracks count]; tracknum++) {
-//        MidiTrack *track = [tracks get:tracknum];
-//        MidiNote *past = [track.notes get:([track.notes count] -1) ];
-//        if (totalpulses < past.startTime + past.duration) {
-//            totalpulses = past.startTime + past.duration;
-//        }
-//    }
-
-    /* If we only have one track with multiple channels, then treat
-     * each channel as a separate track.
-     */
-//    if ([tracks count] == 1 && [MidiFile hasMultipleChannels:[tracks get:0]]) {
-//        MidiTrack *track = [tracks get:0];
-//        Array *trackevents = [events get:track.number];
-//        Array* newtracks = [MidiFile splitChannels:track withEvents:trackevents];
-//        trackPerChannel = YES;
-//      
-//        tracks = newtracks;
-//    }
-
-    //[MidiFile checkStartTimes:tracks];
-
+    //create event array for meta events
+    metaEvents = [Array new:1];
+    Array *metaTrackEvents = [self readTrack:file];
+    [metaEvents add:metaTrackEvents];
+    
     /* Determine the time signature */
     int tempo = 0;
     int numer = 0;
     int denom = 0;
-    for (int tracknum = 0; tracknum < [events count]; tracknum++) {
-        Array *eventlist = [events get:tracknum];
+    int key =0;
+    int isMinor = 0;
+    
+        Array *eventlist = [metaEvents get:0];
         for (int i = 0; i < [eventlist count]; i++) {
             MidiEvent *mevent = [eventlist get:i];
             if (mevent.metaevent == MetaEventTempo && tempo == 0) {
@@ -298,8 +258,14 @@
                 numer = mevent.numerator;
                 denom = mevent.denominator;
             }
+            if (mevent.metaevent == MetaEventKeySignature && key ==0)
+            {
+                key = mevent.keySignature ;
+                isMinor = mevent.isMinor;
+            }
         }
-    }
+    
+    keySignature = key;
 
     if (tempo == 0) {
         tempo = 500000; /* 500,000 microseconds = 0.05 sec */
@@ -312,16 +278,37 @@
                      andQuarter:quarternote
                      andTempo:tempo];
    
-    double ppus= quarternote * (1.0/tempo);;
-     for (int tracknum = 0; tracknum < [tracks count]; tracknum++) {
-        
-         [[self.tracks get:tracknum] setTimeWithPPUS:ppus andTotalPulses:totalpulses];
-     }
+    float ppus= quarternote * (1.0/tempo);;
     
-    //MidiTrack *_track = [self combineToSingleTrack:tracks];
-   
-    //tracks = [Array new:1];
-    //[tracks add:_track];
+    //create event array for note events
+    events = [Array new:num_tracks] ;
+    for (int tracknum = 1; tracknum <= 2; tracknum++) {
+        
+        Array *trackevents = [self readTrack:file];
+        MidiTrack *track = [[MidiTrack alloc] initWithEvents:trackevents andTrack:tracknum andKey:key andPPUS:ppus andTempo:tempo andNumerator:numer];
+        [events add:trackevents];
+        track.number = tracknum;
+        if ([track.measures count] > 0) {
+            [tracks add:track];
+        }
+        
+        if(tracknum > 0)
+        {
+            int numberOfMeasures = (int)[track.measures count];
+            MidiMeasure *lastMeasure = track.measures[numberOfMeasures - 1];
+            
+            
+            
+            MidiNote *last = lastMeasure.notes[[lastMeasure.notes count] - 1];
+            if (totalpulses < last.startTime + last.duration) {
+                totalpulses = last.startTime + last.duration;
+            }
+        }
+        
+        
+    }
+    
+    
     
     return self;
 }
@@ -335,6 +322,7 @@
  * the MTrk header.  Upon exiting, the file offset should be at the
  * start of the next MTrk header.
  */
+
 - (Array*)readTrack:(MidiFileReader*)file {
     Array *result = [Array new:20];
     int starttime = 0;
@@ -349,7 +337,7 @@
     int trackend = tracklen + [file offset];
 
     int eventflag = 0;
-
+    
     while ([file offset] < trackend) {
         /* If the midi file is truncated here, we can still recover.
          * Just return what we've parsed so far.
@@ -374,25 +362,23 @@
         if (peekevent >= EventNoteOff) {
             mevent.hasEventflag = YES;
             eventflag = [file readByte];
-            /* printf("Read new event %d %s\n", eventflag, eventName(eventflag)); */
+            
         }
 
-        /**
-        printf("offset %d:event %d %s delta %d\n",
-               startoffset, eventflag, eventName(eventflag), [mevent deltatime]);
-        **/
 
         if (eventflag >= EventNoteOn && eventflag < EventNoteOn + 16) {
             mevent.eventFlag = EventNoteOn;
             mevent.channel = (u_char)(eventflag - EventNoteOn);
             mevent.notenumber = [file readByte];
             mevent.velocity = [file readByte];
+            
         }
         else if (eventflag >= EventNoteOff && eventflag < EventNoteOff + 16) {
             mevent.eventFlag = EventNoteOff;
             mevent.channel = (u_char)(eventflag - EventNoteOff);
             mevent.notenumber = [file readByte];
             mevent.velocity = [file readByte];
+            
         }
         else if (eventflag >= EventKeyPressure && 
                  eventflag < EventKeyPressure + 16) {
@@ -467,9 +453,16 @@
                     [MidiFileException init:@"Bad Meta Event Tempo len" 
                       offset:[file offset]];
                     @throw e;
+                    
                 }
                 u_char *value = mevent.metavalue;
                 mevent.tempo = ((value[0] << 16) | (value[1] << 8) | value[2]);
+            }
+            else if (mevent.metaevent == MetaEventKeySignature)
+            {
+                
+                mevent.keySignature  = (int8_t)mevent.metavalue[0];
+                mevent.isMinor = (int)mevent.metavalue[1];
             }
             else if (mevent.metaevent == MetaEventEndOfTrack) {
              
@@ -490,412 +483,4 @@
 
 
 
-
-/* Split the given MidiTrack into two tracks, top and bottom.
- * The highest notes will go into top, the lowest into bottom.
- * This function is used to split piano songs into left-hand (bottom)
- * and right-hand (top) tracks.
- */
-//+(Array*)splitTrack:(MidiTrack*) track withMeasure:(int)measurelen{
-//    Array *notes = track.notes;
-//    int notes_count = [notes count];
-//
-//    MidiTrack *top = [[MidiTrack alloc] initWithTrack:1];
-//    MidiTrack *bottom = [[MidiTrack alloc] initWithTrack:2];
-//    Array* result = [Array new:2];
-//    [result add:top]; 
-//    [result add:bottom];
-//
-//    if (notes_count == 0)
-//        return result;
-//
-//    int prevhigh  = 76; /* E5, top of treble staff */
-//    int prevlow   = 45; /* A3, bottom of bass staff */
-//    int startindex = 0;
-//
-//    for (int i = 0; i < notes_count; i++) {
-//        MidiNote *note = [notes get:i];
-//        int number = note.number;
-//
-//        int high, low, highExact, lowExact;
-//        high = low = highExact = lowExact = number;
-//
-//        while ([(MidiNote*)[notes get:startindex] endTime] < note.startTime) {
-//            startindex++;
-//        }
-//
-//        /* I've tried several algorithms for splitting a track in two,
-//         * and the one below seems to work the best:
-//         * - If this note is more than an octave from the high/low notes
-//         *   (that start exactly at this start time), choose the closest one.
-//         * - If this note is more than an octave from the high/low notes
-//         *   (in this note's time duration), choose the closest one.
-//         * - If the high and low notes (that start exactly at this starttime)
-//         *   are more than an octave apart, choose the closest note.
-//         * - If the high and low notes (that overlap this starttime)
-//         *   are more than an octave apart, choose the closest note.
-//         * - Else, look at the previous high/low notes that were more than an
-//         *   octave apart.  Choose the closeset note.
-//         */
-//        [MidiFile findHighLowNotes:notes withMeasure:measurelen startIndex:startindex
-//                  fromStart:note.startTime toEnd:note.endTime
-//                  withHigh:&high andLow:&low];
-//        [MidiFile findExactHighLowNotes:notes startIndex:startindex withStart:note.startTime
-//                  withHigh:&highExact andLow:&lowExact];
-//
-//        if (highExact - number > 12 || number - lowExact > 12) {
-//            if (highExact - number <= number - lowExact) {
-//                [top addNote:note];
-//            }
-//            else {
-//                [bottom addNote:note];
-//            }
-//        }
-//        else if (high - number > 12 || number - low > 12) {
-//            if (high - number <= number - low) {
-//                [top addNote:note];
-//            }
-//            else {
-//                [bottom addNote:note];
-//            }
-//        }
-//        else if (highExact - lowExact > 12) {
-//            if (highExact - number <= number - lowExact) {
-//                [top addNote:note];
-//            }
-//            else {
-//                [bottom addNote:note];
-//            }
-//        }
-//        else if (high - low > 12) {
-//            if (high - number <= number - low) {
-//                [top addNote:note];
-//            }
-//            else {
-//                [bottom addNote:note];
-//            }
-//        }
-//        else {
-//            if (prevhigh - number <= number - prevlow) {
-//                [top addNote:note];
-//            }
-//            else {
-//                [bottom addNote:note];
-//            }
-//        }
-//
-//        /* The prevhigh/prevlow are set to the last high/low
-//         * that are more than an octave apart.
-//         */
-//        if (high - low > 12) {
-//            prevhigh = high;
-//            prevlow = low;
-//        }
-//    }
-//
-//    [top.notes sort:sortbytime];
-//    [bottom.notes sort:sortbytime];
-//
-//    return result;
-//}
-
-
-
-/** Combine the notes in the given tracks into a single MidiTrack.
- *  The individual tracks are already sorted.  To merge them, we
- *  use a mergesort-like algorithm.
- */
--(MidiTrack*) combineToSingleTrack:(Array*)tracksArray {
-    /* Add all notes into one track */
-    MidiTrack *result = [[MidiTrack alloc] initWithTrack:1];
-
-    if ([tracksArray count] == 0) {
-        return result;
-    }
-    else if ([tracksArray count] == 1) {
-        MidiTrack *track = [tracksArray get:0];
-        for (int i = 0; i < [track.notes count]; i++) {
-            [result addNote:[track.notes get:i] ];
-        }
-        return result;
-    }
-
-    int noteindex[64];
-    int notecount[64];
-    for (int tracknum = 0; tracknum < [tracksArray count]; tracknum++) {
-        MidiTrack *track = [tracksArray get:tracknum];
-        noteindex[tracknum] = 0;
-        notecount[tracknum] = [track.notes count];
-    }
-
-    MidiNote *prevnote = nil;
-    while (1) {
-        MidiNote *lowestnote = nil;
-        int lowestTrack = -1;
-        for (int tracknum = 0; tracknum < [tracksArray count]; tracknum++) {
-            MidiTrack *track = [tracksArray get:tracknum];
-            if (noteindex[tracknum] >= notecount[tracknum]) {
-                continue;
-            }
-            MidiNote *note = [track.notes get:noteindex[tracknum]];
-            if (lowestnote == nil) {
-                lowestnote = note;
-                lowestTrack = tracknum;
-            }
-            else if (note.startTime < lowestnote.startTime) {
-                lowestnote = note;
-                lowestTrack = tracknum;
-            }
-            else if (note.startTime == lowestnote.startTime &&
-                     note.number < lowestnote.number) {
-                lowestnote = note;
-                lowestTrack = tracknum;
-            }
-        }
-        if (lowestnote == nil) {
-            /* We've finished the merge */
-            break;
-        }
-        noteindex[lowestTrack]++;
-        if ((prevnote != nil) && (prevnote.startTime == lowestnote.startTime) &&
-            (prevnote.number == lowestnote.number) ) {
-
-            /* Don't add duplicate notes, with the same start time and number */
-            if (lowestnote.duration > prevnote.duration) {
-                prevnote.duration = lowestnote.duration;
-            }
-        }
-        else {
-            [result addNote:lowestnote];
-            prevnote = lowestnote;
-        }
-    }
-
-    return result;
-}
-
-
-/** Combine the notes in all the tracks given into two MidiTracks,
- * and return them.
- * 
- * This function is intended for piano songs, when we want to display
- * a left-hand track and a right-hand track.  The lower notes go into 
- * the left-hand track, and the higher notes go into the right hand 
- * track.
- */
-//+(Array*) combineToTwoTracks:(Array*) tracks withMeasure:(int)measurelen {
-//    MidiTrack *single = [MidiFile combineToSingleTrack:tracks];
-//    Array* result = [MidiFile splitTrack:single withMeasure:measurelen];
-//
-//    Array* lyrics = [Array new:20];
-//    for (int tracknum = 0; tracknum < [tracks count]; tracknum++) {
-//        MidiTrack *track = [tracks get:tracknum];
-//        if (track.lyrics != nil) {
-//            [lyrics addArray:track.lyrics];
-//        }
-//    }
-//    if ([lyrics count] > 0) {
-//        [lyrics sort:sortMidiEvent];
-//        MidiTrack *track = [result get:0];
-//        track.lyrics = lyrics;
-//    }
-//    return result;
-//}
-
-
-///** Check that the MidiNote start times are in increasing order.
-// * This is for debugging purposes.
-// */
-//+(void)checkStartTimes:(Array*) tracks {
-//    for (int tracknum = 0; tracknum < [tracks count]; tracknum++) {
-//        MidiTrack *track = [tracks get:tracknum];
-//        int prevtime = -1;
-//        for (int j = 0; j < [track.notes count]; j++) {
-//            MidiNote *note = [track.notes get:j];
-//            assert(note.startTime >= prevtime);
-//            prevtime = note.startTime;
-//        }
-//    }
-//}
-
-
-
-
-
-/** We want note durations to span up to the next note in general.
- * The sheet music looks nicer that way.  In contrast, sheet music
- * with lots of 16th/32nd notes separated by small rests doesn't
- * look as nice.  Having nice looking sheet music is more important
- * than faithfully representing the Midi File data.
- *
- * Therefore, this function rounds the duration of MidiNotes up to
- * the next note where possible.
- */
-//+(void)roundDurations:(Array*)tracks withQuarter:(int) quarternote {
-//    for (int tracknum = 0; tracknum < [tracks count]; tracknum++) {
-//        MidiTrack *track = [tracks get:tracknum];
-//        MidiNote *prevNote = nil;
-//
-//        for (int i = 0; i < [track.notes count] - 1; i++) {
-//            MidiNote *note1 = [track.notes get:i];
-//            if (prevNote == nil) {
-//                prevNote = note1;
-//            }
-//
-//            /* Get the next note that has a different start time */
-//            MidiNote *note2 = note1;
-//            for (int j = i+1; j < [track.notes count]; j++) {
-//                note2 = [track.notes get:j];
-//                if (note1.startTime < note2.startTime) {
-//                    break;
-//                }
-//            }
-//            int maxduration = note2.startTime - note1.startTime;
-//
-//            int dur = 0;
-//            if (quarternote <= maxduration)
-//                dur = quarternote;
-//            else if (quarternote/2 <= maxduration)
-//                dur = quarternote/2;
-//            else if (quarternote/3 <= maxduration)
-//                dur = quarternote/3;
-//            else if (quarternote/4 <= maxduration)
-//                dur = quarternote/4;
-//
-//
-//            if (dur < note1.duration) {
-//                dur = note1.duration;
-//            }
-//
-//            /* Special case: If the previous note's duration
-//             * matches this note's duration, we can make a notepair.
-//             * So don't expand the duration in that case.
-//             */
-//            if (prevNote.startTime + prevNote.duration == note1.startTime &&
-//                prevNote.duration == note1.duration) {
-//
-//                dur = note1.duration;
-//            }
-//            note1.duration = dur;
-//            MidiNote *nextNote = [track.notes get:i+1];
-//            if (nextNote.startTime != note1.startTime) {
-//                prevNote = note1;
-//            }
-//        }
-//    }
-//}
-
-/** Split the given track into multiple tracks, separating each
- * channel into a separate track.
- */
-//+(Array*) splitChannels:(MidiTrack*) origtrack withEvents:(Array*)events {
-//
-//    /* Find the instrument used for each channel */
-//    IntArray* channelInstruments = [IntArray new:16];
-//    for (int i =0; i < 16; i++) {
-//        [channelInstruments add:0];
-//    }
-//    for (int i = 0; i < [events count]; i++) {
-//        MidiEvent *mevent = [events get:i];
-//        if (mevent.eventFlag == EventProgramChange) {
-//            [channelInstruments set:mevent.instrument index:mevent.channel];
-//        }
-//    }
-//    [channelInstruments set:128 index:9]; /* Channel 9 = Percussion */
-//
-//    Array *result = [Array new:2];
-//    for (int i = 0; i < [origtrack.notes count]; i++) {
-//        MidiNote *note = [origtrack.notes get:i];
-//        BOOL foundchannel = FALSE;
-//        for (int tracknum = 0; tracknum < [result count]; tracknum++) {
-//            MidiTrack *track = [result get:tracknum];
-//			MidiNote *note2 = [track.notes get:0];
-//            if (note.channel == note2.channel) {
-//                foundchannel = TRUE;
-//                [track addNote:note];
-//            }
-//        }
-//        if (!foundchannel) {
-//            MidiTrack* track = [[MidiTrack alloc] initWithTrack:([result count] + 1)];
-//            [track addNote:note];
-//            int instrument = [channelInstruments get:note.channel];
-//            track.instrument = instrument;
-//            [result add:track];
-//         
-//        }
-//    }
-//    if (origtrack.lyrics != nil) {
-//        for (int i = 0; i < [origtrack.lyrics count]; i++) {
-//            MidiEvent *lyricEvent = [origtrack.lyrics get:i];
-//            for (int j = 0; j < [result count]; j++) {
-//                MidiTrack *track = [result get:j];
-//			    MidiNote *note = [track.notes get:0];
-//                if (lyricEvent.channel == note.channel) {
-//                    [track addLyric:lyricEvent];
-//                }
-//            }
-//        }
-//    }
-//    return result;
-//}
-
-/** Return the last start time */
-//-(int)endTime {
-//    int lastStart = 0;
-//    for (int i = 0; i < [tracks count]; i++) {
-//        MidiTrack *track = [tracks get:i];
-//        if ([track.notes count] == 0) {
-//            continue;
-//        }
-//        int lastindex = [track.notes count] - 1;
-//		MidiNote *lastnote = [track.notes get:lastindex];
-//        int last = lastnote.startTime;
-//        if (last > lastStart) {
-//            lastStart = last;
-//        }
-//    }
-//    return lastStart;
-//}
-//
-///** Given a filename, like "Bach__Minuet_in_G", return
-// *  the string "Bach: Minuet in G".
-// */
-//+(NSString*)titleName:(NSString*)filename {
-//    NSString *title = filename;
-//    if ([title hasSuffix:@".mid"]) {
-//        title = [title substringToIndex:[title length] - 4];
-//    }
-//    NSArray *pieces = [title componentsSeparatedByString:@"__"];
-//    title = [pieces componentsJoinedByString:@": "];
-//    pieces = [title componentsSeparatedByString:@"_"];
-//    title = [pieces componentsJoinedByString:@" "];
-//    return title;
-//}
-
-
-///** Return true if this midi file has lyrics */
-//-(BOOL)hasLyrics {
-//    for (int i = 0; i < [tracks count]; i++) {
-//        MidiTrack *track = [tracks get:i];
-//        if (track.lyrics != nil) {
-//            return YES;
-//        }
-//    }
-//    return NO;
-//}
-
-//
-//- (NSString*)description {
-//    NSString *s = [NSString stringWithFormat:
-//                     @"Midi File tracks=%d quarter=%d %@\n",
-//                     [tracks count], quarternote, [time description]];
-//    for (int i = 0; i < [tracks count]; i++) {
-//        MidiTrack *track = [tracks get:i];
-//        s = [s stringByAppendingString:[track description]];
-//    }
-//    return s;
-//}
-
-@end /* class MidiFile */
-
-
+@end

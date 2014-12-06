@@ -10,4 +10,7 @@
 
 @interface GameScene : SKScene
 
+@property (nonatomic, retain) GameScene * objCClassPtr;
+
+-(void)checkNoteHitWithNumber:(int)userKeyNumber;
 @end

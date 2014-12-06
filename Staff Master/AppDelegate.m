@@ -8,7 +8,6 @@
 
 #import "AppDelegate.h"
 #import "GameScene.h"
-#import "MIDIUtility.h"
 
 @implementation SKScene (Unarchive)
 
@@ -37,7 +36,7 @@
     GameScene *scene = [GameScene unarchiveFromFile:@"GameScene"];
 
     /* Set the scale mode to scale to fit the window */
-   // scene.scaleMode = SKSceneScaleModeResizeFill;
+    scene.scaleMode = SKSceneScaleModeResizeFill;
     
     scene.Size = self.skView.frame.size;
 
@@ -50,7 +49,7 @@
     self.skView.showsFPS = YES;
     self.skView.showsNodeCount = YES;
     
-    [MIDIUtility setupDevice];
+    
 }
 
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender {

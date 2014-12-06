@@ -43,7 +43,7 @@
 
 /* Return the size of the array */
 - (int)count {
-    return [array count];
+    return (int)[array count];
 }
 
 /* Add an object to the array */
@@ -83,7 +83,7 @@
  * well here.
  */
 - (void)sort:(int (*)(void *, void*)) compare {
-    int count = [array count];
+    int count = (int)[array count];
     void** temparray = (void**) malloc(sizeof(void*) * count);
     for (int i = 0; i < count; i++) {
         id obj = [array objectAtIndex:i];
@@ -102,7 +102,7 @@
 
 /* Return a sub-range of the Array */
 - (Array*)range:(int)start end:(int)n {
-    Array *result = [Array new:[array count]/2];
+    Array *result = [Array new:(int)[array count]/2];
     for (int i = start; i < n; i++) {
         [result add:[array objectAtIndex:i]];
     }
@@ -111,7 +111,7 @@
 
 /* Filter the array using the given function */
 - (Array*)filter:(BOOL(*)(id)) func  {
-    Array *result = [Array new:[array count]/2];
+    Array *result = [Array new:(int)[array count]/2];
     for (int i = 0; i < [array count]; i++) {
         id obj = [array objectAtIndex:i];
         if (func(obj)) {

@@ -38,6 +38,8 @@ int sortMidiEvent(void* v1, void* v2);
     u_short pitchBend;     /** The pitch bend value */
     u_char  numerator;     /** The numerator, for TimeSignature meta events */
     u_char  denominator;   /** The denominator, for TimeSignature meta events */
+    signed char  keySignature;
+    u_char  isMinor;
     int     tempo;         /** The tempo, for Tempo meta events */
     u_char  metaevent;     /** The metaevent, used if eventflag is MetaEvent */
     int     metalength;    /** The metaevent length  */
@@ -59,6 +61,8 @@ int sortMidiEvent(void* v1, void* v2);
 @property (nonatomic, assign) u_short pitchBend;
 @property (nonatomic, assign) u_char numerator;
 @property (nonatomic, assign) u_char denominator;
+@property (nonatomic, assign) signed char keySignature;
+@property (nonatomic, assign) u_char isMinor;
 @property (nonatomic, assign) int tempo;
 @property (nonatomic, assign) u_char metaevent;
 @property (nonatomic, assign) int metalength;

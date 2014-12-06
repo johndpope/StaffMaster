@@ -19,7 +19,7 @@
 #import "Array.h"
 #import "TimeSignature.h"
 
-@interface MidiNote : NSObject <NSCopying> {
+@interface MidiNote : NSObject {
     int startTime;  /** The start time, in pulses */
     int startTimeuS;
     int channel;    /** The channel */
@@ -27,6 +27,7 @@
     int velocity;
     int duration;   /** The duration, in pulses */
     int durationuS;
+    int ledgerLinesFromNote;
 }
 
 @property (nonatomic, assign) int startTime;
@@ -38,12 +39,18 @@
 @property (nonatomic, assign) int durationuS;
 @property (nonatomic, readonly) int endTime;
 @property (nonatomic, readonly) int endTimeuS;
+@property (nonatomic, assign) NSString *name;
+@property (nonatomic, assign) NSString *normalState;
+@property (nonatomic, assign) bool isAccidental;
+@property (nonatomic, assign) bool showAccidental;
+@property (nonatomic, assign) int ledgerLines;
+@property (nonatomic, assign) NSString* clef;
 
 -(void)noteOff:(int)endtime;
--(id)copyWithZone:(NSZone*)zone;
+-(void)noteOffuS:(int)endtimeuS;
 -(NSString*)description;
-//-(void)setTimewithValue: (int)value;
-//-(void)setDurationwithValue:(int)value;
+- (id)initWithKey:(int)key andClef:(NSString*)clefType;
+-(int)ledgerLinesFromNote:(NSString*)noteName andClef:(NSString*)clefType;
 
 @end
 

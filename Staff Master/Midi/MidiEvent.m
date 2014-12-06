@@ -62,6 +62,8 @@
 @synthesize pitchBend;
 @synthesize numerator;
 @synthesize denominator;
+@synthesize keySignature;
+@synthesize isMinor;
 @synthesize tempo;
 @synthesize metaevent;
 @synthesize metalength;
@@ -84,6 +86,8 @@
     pitchBend = 0;
     numerator = 0;
     denominator = 0;
+    keySignature = 0;
+    isMinor = 0;
     tempo = 0;
     metaevent = 0;
     metalength = 0;
@@ -109,6 +113,8 @@
     mevent.pitchBend = pitchBend;
     mevent.numerator = numerator;
     mevent.denominator = denominator;
+    mevent.keySignature = keySignature;
+    mevent.isMinor = isMinor;
     mevent.tempo = tempo;
     mevent.metaevent = metaevent;
     mevent.metalength = metalength;

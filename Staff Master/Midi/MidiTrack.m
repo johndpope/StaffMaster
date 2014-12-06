@@ -22,7 +22,7 @@
 #include <stdio.h>
 #include <sys/stat.h>
 #include <math.h>
-
+#include "MidiMeasure.h"
 /** Compare two MidiNotes based on their start times.
  *  If the start times are equal, compare by their numbers.
  *  Used by the C mergesort function.
@@ -57,39 +57,70 @@
 
 @synthesize number;
 @synthesize notes;
+@synthesize measures;
 @synthesize instrument;
 @synthesize lyrics;
 
-/** Create an empty MidiTrack. Used by the copy method */
-- (id)initWithTrack:(int)t {
-    number = t;
-    notes = [Array new:20];
-    instrument = 0;
-    return self;
-}
+float pulsesPerMicrosecond;
+
 
 /** Create a MidiTrack based on the Midi events.  Extract the NoteOn/NoteOff
  *  events to gather the list of MidiNotes.
  */
-- (id)initWithEvents:(Array*)list andTrack:(int)num {
+- (id)initWithEvents:(Array*)list andTrack:(int)num andKey:(int)keySignature andPPUS:(float)ppus andTempo:(int)tempo andNumerator:(int)numer{
     number = num;
     notes = [Array new:100];
-
+    pulsesPerMicrosecond = ppus;
+    
     instrument = 0;
-
+    NSString *clef = @"";
+    if (num == 1) {
+        clef = @"Treble";
+    }
+    else if (num == 2){
+        clef = @"Bass";
+    }
+    
+    //NSMutableArray *measures = [[NSMutableArray alloc]init];
+    measures = [[NSMutableArray alloc]init];
+    int measureLength = numer*tempo;
+    MidiMeasure *measure = [[MidiMeasure alloc] initWithStartTime:0 andMeasureLength:measureLength];
+    [measures addObject:measure];
+    
     for (int i= 0;i < [list count]; i++) {
         MidiEvent *mevent = [list get:i];
         if (mevent.eventFlag == EventNoteOn && mevent.velocity > 0) {
-            MidiNote *note = [[MidiNote alloc] init];
+            MidiNote *note = [[MidiNote alloc] initWithKey:keySignature andClef:clef];
             note.startTime = mevent.startTime;
-            note.startTimeuS = 0;
-            note.duration = mevent.deltaTime;
-            note.durationuS = 0;
+            note.startTimeuS = mevent.startTime*(1.0/(pulsesPerMicrosecond)) + 1; //Add 1 to round precision errors.  Timer is not even precise enough to detect 1 uS differece.
             note.channel = mevent.channel;
             note.number = mevent.notenumber;
             note.velocity = mevent.velocity;
-            [self addNote:note];
+            note.name = [note name];
+            note.normalState = [note normalState];
+            note.isAccidental = [note isAccidental];
+            note.ledgerLines = [note ledgerLinesFromNote:note.name andClef:clef];
             
+            //NSLog(@"%i", note.number);
+            
+            while (note.startTimeuS >= measure.startTime + measure.duration) {
+                measure = [[MidiMeasure alloc] initWithStartTime:(int)[measures count]*measureLength andMeasureLength:measureLength];
+                [measures addObject:measure];
+            }
+            
+            if (note.startTimeuS >= measure.startTime && note.startTimeuS < (measure.startTime + measure.duration))
+            {
+                
+                
+                note.showAccidental = [self decideToShowAccidental:measure withNote:note];
+                [measure.notes addObject:note];
+                //int index = (int)[measure.notes count];
+                
+                
+            }
+            
+           
+         
         }
         else if (mevent.eventFlag == EventNoteOn && mevent.velocity == 0) {
             [self noteOffWithChannel:mevent.channel andNumber:mevent.notenumber
@@ -102,9 +133,7 @@
         else if (mevent.eventFlag == EventProgramChange) {
             instrument = mevent.instrument;
         }
-        else if (mevent.metaevent == MetaEventLyric) {
-            [self addLyric:mevent];
-        }
+        
     }
     if ([notes count] > 0 && [(MidiNote*)[notes get:0] channel] == 9) {
         instrument = 128;  /* Percussion */
@@ -116,17 +145,8 @@
 - (void)dealloc {
     notes = nil;
     lyrics = nil;
-    //[super dealloc];
 }
 
-- (NSString*)instrumentName {
-    if (instrument >= 0 && instrument <= 128) {
-        return [[MidiFile instrumentNames] objectAtIndex:instrument];
-    }
-    else {
-        return @"";
-    }
-}
 
 /** Add a MidiNote to this track.  This is called for each NoteOn event */
 - (void)addNote:(MidiNote*)m {
@@ -136,44 +156,83 @@
 /** A NoteOff event occured.  Find the MidiNote of the corresponding
  * NoteOn event, and update the duration of the MidiNote.
  */
-- (void)noteOffWithChannel:(int)channel andNumber:(int)num andTime:(int)endtime {
-    for (int i = [notes count]-1; i >= 0; i--) {
-        MidiNote* note = [notes get:i];
-        if (note.channel == channel && note.number == num &&
-            note.duration == 0) {
-            [note noteOff:endtime];
-            return;
+- (void)noteOffWithChannel:(int)channel andNumber:(int)num andTime:(int)endtime{
+
+    
+    for (int measureNum = 0; measureNum < [measures count]; measureNum++) {
+        MidiMeasure* measure = measures[measureNum];
+        
+        for (int i = 0; i < [measure.notes count]; i++)
+        {
+            MidiNote* note = measure.notes[i];
+            if (note.channel == channel && note.number == num &&
+                note.duration == 0) {
+                [note noteOff:endtime];
+                [note noteOffuS: endtime*(1.0/(pulsesPerMicrosecond))];
+                return;
+            }
         }
     }
+    
 }
 
-/* Add a Lyric MidiEvent */
-- (void)addLyric:(MidiEvent *)mevent {
-    if (lyrics == nil) {
-        lyrics = [Array new:5];
-    }
-    [lyrics add:mevent];
-}
+-(bool)decideToShowAccidental:(MidiMeasure*)measure withNote:(MidiNote*)currentNote {
+    
+    bool showAccidental;
+    MidiNote* previousNote;
 
-
-/** Return a deep copy clone of this MidiTrack */
-- (id)copyWithZone:(NSZone*)zone {
-    MidiTrack *track = [[MidiTrack alloc] initWithTrack:number];
-    track.instrument = instrument;
-    for (int i = 0; i < [notes count]; i++) {
-        MidiNote *note = [notes get:i];
-        MidiNote *notecopy = [note copy];
-        [track.notes add:notecopy ];
-    }
-    if (lyrics != nil) {
-        Array *newlyrics = [Array new:[lyrics count]];
-        for (int i = 0; i < [lyrics count]; i++) {
-            MidiEvent *ev = [lyrics get:i];
-            [newlyrics add:ev];
+    if (currentNote.isAccidental) {
+         showAccidental = YES;
+        if ([measure.notes count] > 0) {
+            int i =(int)[measure.notes count] - 1;
+            while((previousNote.name != currentNote.name) && i >= 0){
+                previousNote = measure.notes[i];
+            
+                if (previousNote.name == currentNote.name) {
+                    if(currentNote.number == previousNote.number)
+                    {
+                        showAccidental = NO;
+                    }
+                    else
+                    {
+                        showAccidental = YES;
+                        break;
+                    }
+                }
+                i--;
+            };
         }
-        track.lyrics = newlyrics;
     }
-    return track;
+    else
+    {
+        showAccidental = NO;
+        if ([measure.notes count] > 0) {
+            int i =(int)[measure.notes count] - 1;
+            do{
+                previousNote = measure.notes[i];
+                
+                if (previousNote.name == currentNote.name) {
+                    if(currentNote.number == previousNote.number)
+                    {
+                        showAccidental = NO;
+                    }
+                    else
+                    {
+                        showAccidental = YES;
+                        break;
+                    }
+                }
+                
+                
+                i--;
+            }while((previousNote.name != currentNote.name) && i >= 0);
+        }
+    }
+    
+    return showAccidental;
+    
+    
+    
 }
 
 - (NSString*)description {
@@ -187,20 +246,7 @@
     s = [s stringByAppendingString:@"End Track\n"];
     return s;
 }
--(void)setTimeWithPPUS:(double)ppus andTotalPulses:(int) totalPulses
-{
-   for (int i= 0;i < [self.notes count]; i++) {
-       
-       
-       MidiNote *note =[self.notes get:i];
-       
-       [note setStartTimeuS:note.startTime*(1.0/(ppus))];
-      
-       
-       [note setDurationuS:note.duration*(1/(ppus))];
-       
-   }
-}
+
 
 @end /* class MidiTrack */
 

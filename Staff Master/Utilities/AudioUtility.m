@@ -7,7 +7,6 @@
 //
 
 #import "AudioUtility.h"
-//#import "UIKit/UIKit.h"
 
 @implementation BAudioController
 
@@ -29,7 +28,6 @@
         
         
         AUGraphAddNode(audioGraph, &cd, &outputNode);
-        
         AUGraphNodeInfo(audioGraph, outputNode, &cd, &outputUnit);
         
         AUNode mixerNode;
@@ -49,8 +47,8 @@
         AUGraphInitialize(audioGraph);
         AUGraphStart(audioGraph);
         
-        AUNode synthNode;
         
+        AUNode synthNode;
         
         cd.componentManufacturer = kAudioUnitManufacturer_Apple;
         cd.componentFlags = 0;
@@ -63,8 +61,29 @@
         
         AUGraphConnectNodeInput(audioGraph, synthNode, 0, mixerNode, 0);
         
+        
+        AUNode synthNodeFile;
+        
+        cd.componentManufacturer = kAudioUnitManufacturer_Apple;
+        cd.componentFlags = 0;
+        cd.componentFlagsMask = 0;
+        cd.componentType = kAudioUnitType_MusicDevice;
+        cd.componentSubType = kAudioUnitSubType_DLSSynth;
+        
+        AUGraphAddNode(audioGraph, &cd, &synthNodeFile);
+        AUGraphNodeInfo(audioGraph, synthNodeFile, &cd, &synthUnitFile);
+        
+        AUGraphConnectNodeInput(audioGraph, synthNodeFile, 0, mixerNode, 1);
+        
+        
+        
+        
+        
         AUGraphUpdate(audioGraph, NULL);
-        CAShow(audioGraph);
+        //CAShow(audioGraph);
+        
+        
+        
         
     }
     return self;
@@ -81,7 +100,7 @@
 
 -(void) loadSoundFont: (NSString*) path withPatch: (int) patch withBank: (UInt8) bank withSampler: (AudioUnit) sampler {
         
-    NSLog(@"Sound font: %@", path);
+   
     
     NSURL *presetURL = [[NSURL alloc] initFileURLWithPath:[[NSBundle mainBundle] pathForResource:path ofType:@"sf2"]];
     [self loadFromDLSOrSoundFont: (NSURL *)presetURL withBank: bank withPatch: patch  withSampler:sampler];
@@ -117,12 +136,20 @@
 }
 
 
--(void) noteOn:(Byte)note withVelociy:(UInt32)velocity
+-(void) noteOn:(Byte)note withVelocity:(UInt32)velocity
 {
     MusicDeviceMIDIEvent(synthUnit, 0x90, note,  velocity, 0);
 }
 -(void) noteOff:(Byte)note {
     MusicDeviceMIDIEvent(synthUnit, 0x80, note, 0, 0);
+}
+
+-(void) noteOnFile:(Byte)note withVelocity:(UInt32)velocity
+{
+    MusicDeviceMIDIEvent(synthUnitFile, 0x90, note,  velocity, 0);
+}
+-(void) noteOffFile:(Byte)note {
+    MusicDeviceMIDIEvent(synthUnitFile, 0x80, note, 0, 0);
 }
 
 

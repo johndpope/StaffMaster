@@ -14,6 +14,7 @@
     
     AUGraph audioGraph;
     AudioUnit synthUnit;
+    AudioUnit synthUnitFile;
     AudioUnit mixerUnit;
     AudioUnit outputUnit;
 
@@ -22,8 +23,8 @@
 
 
 -(void) setInputVolume: (Float32) volume withBus: (AudioUnitElement) bus;
-
--(void) noteOn:(Byte)note withVelociy:(UInt32)velocity;
+-(void) noteOn:(Byte)note withVelocity:(UInt32)velocity;
 -(void) noteOff:(Byte)note;
-
+-(void) noteOnFile:(Byte)note withVelocity:(UInt32)velocity;
+-(void) noteOffFile:(Byte)note;
 @end

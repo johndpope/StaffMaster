@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>60F10AF1-375C-4E59-AEC3-DB90782B015D</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Staff Master</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>6A212977EFDEB4F548E23168042FD465A4308F44</key>
+		<string>https://github.com/mosstech/StaffMaster.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Staff Master.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>6A212977EFDEB4F548E23168042FD465A4308F44</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/mosstech/StaffMaster.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>6A212977EFDEB4F548E23168042FD465A4308F44</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>6A212977EFDEB4F548E23168042FD465A4308F44</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Staff%20Master</string>
+		</dict>
+	</array>
+</dict>
+</plist>

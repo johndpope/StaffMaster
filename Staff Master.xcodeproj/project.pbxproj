@@ -7,9 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		175CFA321A17E91600BF8625 /* Staff@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 175CFA2E1A17E91600BF8625 /* Staff@2x.png */; };
-		175CFA331A17E91600BF8625 /* Note@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 175CFA2F1A17E91600BF8625 /* Note@2x.png */; };
-		175CFA341A17E91600BF8625 /* MidiTest.mid in Resources */ = {isa = PBXBuildFile; fileRef = 175CFA301A17E91600BF8625 /* MidiTest.mid */; };
+		174062061A21D104005A464F /* MeasureBar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 174062051A21D104005A464F /* MeasureBar@2x.png */; };
+		1740620C1A327A9C005A464F /* Chopin_-_Nocturne_Op_9_No_1.mid in Resources */ = {isa = PBXBuildFile; fileRef = 1740620A1A327A9C005A464F /* Chopin_-_Nocturne_Op_9_No_1.mid */; };
+		1740620D1A327A9C005A464F /* Field_-_Nocturne_in_B-flat_major.mid in Resources */ = {isa = PBXBuildFile; fileRef = 1740620B1A327A9C005A464F /* Field_-_Nocturne_in_B-flat_major.mid */; };
+		1740620F1A32AEA1005A464F /* LedgerLine@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1740620E1A32AEA1005A464F /* LedgerLine@2x.png */; };
+		174A56161A204110000FD27D /* NormalNote@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 174A56151A204110000FD27D /* NormalNote@2x.png */; };
+		174A56181A204116000FD27D /* SharpNote@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 174A56171A204116000FD27D /* SharpNote@2x.png */; };
+		174A561A1A20411D000FD27D /* NaturalNote@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 174A56191A20411D000FD27D /* NaturalNote@2x.png */; };
+		174A561C1A204157000FD27D /* FlatNote@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 174A561B1A204157000FD27D /* FlatNote@2x.png */; };
+		174A56201A204917000FD27D /* NotePad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 174A561F1A204917000FD27D /* NotePad@2x.png */; };
 		175CFA351A17E91600BF8625 /* Clouds@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 175CFA311A17E91600BF8625 /* Clouds@2x.png */; };
 		175CFA481A17E99E00BF8625 /* TimeSignature.m in Sources */ = {isa = PBXBuildFile; fileRef = 175CFA361A17E99E00BF8625 /* TimeSignature.m */; };
 		175CFA491A17E99E00BF8625 /* MidiTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 175CFA381A17E99E00BF8625 /* MidiTrack.m */; };
@@ -25,6 +31,8 @@
 		175CFA581A17EB5100BF8625 /* GrandStaffLine@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 175CFA571A17EB5100BF8625 /* GrandStaffLine@2x.png */; };
 		175CFA5B1A17FFBD00BF8625 /* TrebleClef@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 175CFA591A17FFBD00BF8625 /* TrebleClef@2x.png */; };
 		175CFA5C1A17FFBD00BF8625 /* BassClef@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 175CFA5A1A17FFBD00BF8625 /* BassClef@2x.png */; };
+		825944D01A2EB77A007BA562 /* Pause@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 825944CF1A2EB77A007BA562 /* Pause@2x.png */; };
+		825944D21A3173FA007BA562 /* Play@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 825944D11A3173FA007BA562 /* Play@2x.png */; };
 		82D968611A15C83A0060604F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 82D968601A15C83A0060604F /* AppDelegate.m */; };
 		82D968631A15C83A0060604F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 82D968621A15C83A0060604F /* main.m */; };
 		82D968661A15C83A0060604F /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 82D968651A15C83A0060604F /* GameScene.m */; };
@@ -32,7 +40,7 @@
 		82D9686A1A15C83A0060604F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 82D968691A15C83A0060604F /* Images.xcassets */; };
 		82D9686D1A15C83A0060604F /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82D9686B1A15C83A0060604F /* MainMenu.xib */; };
 		82D968791A15C83A0060604F /* Staff_MasterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 82D968781A15C83A0060604F /* Staff_MasterTests.m */; };
-		82D9F85C1A19C7ED003318CD /* MidiFile.mid in Resources */ = {isa = PBXBuildFile; fileRef = 82D9F85B1A19C7ED003318CD /* MidiFile.mid */; };
+		82ED50F01A1DA76100AFCB00 /* MidiMeasure.m in Sources */ = {isa = PBXBuildFile; fileRef = 82ED50EF1A1DA76100AFCB00 /* MidiMeasure.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,9 +54,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		175CFA2E1A17E91600BF8625 /* Staff@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Staff@2x.png"; path = "Resources/Staff@2x.png"; sourceTree = "<group>"; };
-		175CFA2F1A17E91600BF8625 /* Note@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Note@2x.png"; path = "Resources/Note@2x.png"; sourceTree = "<group>"; };
-		175CFA301A17E91600BF8625 /* MidiTest.mid */ = {isa = PBXFileReference; lastKnownFileType = audio.midi; name = MidiTest.mid; path = Resources/MidiTest.mid; sourceTree = "<group>"; };
+		174062051A21D104005A464F /* MeasureBar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "MeasureBar@2x.png"; path = "Resources/MeasureBar@2x.png"; sourceTree = "<group>"; };
+		1740620A1A327A9C005A464F /* Chopin_-_Nocturne_Op_9_No_1.mid */ = {isa = PBXFileReference; lastKnownFileType = audio.midi; name = "Chopin_-_Nocturne_Op_9_No_1.mid"; path = "Resources/Songs/Chopin_-_Nocturne_Op_9_No_1.mid"; sourceTree = "<group>"; };
+		1740620B1A327A9C005A464F /* Field_-_Nocturne_in_B-flat_major.mid */ = {isa = PBXFileReference; lastKnownFileType = audio.midi; name = "Field_-_Nocturne_in_B-flat_major.mid"; path = "Resources/Songs/Field_-_Nocturne_in_B-flat_major.mid"; sourceTree = "<group>"; };
+		1740620E1A32AEA1005A464F /* LedgerLine@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "LedgerLine@2x.png"; path = "Resources/LedgerLine@2x.png"; sourceTree = "<group>"; };
+		174A56151A204110000FD27D /* NormalNote@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "NormalNote@2x.png"; path = "Resources/NormalNote@2x.png"; sourceTree = "<group>"; };
+		174A56171A204116000FD27D /* SharpNote@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "SharpNote@2x.png"; path = "Resources/SharpNote@2x.png"; sourceTree = "<group>"; };
+		174A56191A20411D000FD27D /* NaturalNote@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "NaturalNote@2x.png"; path = "Resources/NaturalNote@2x.png"; sourceTree = "<group>"; };
+		174A561B1A204157000FD27D /* FlatNote@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "FlatNote@2x.png"; path = "Resources/FlatNote@2x.png"; sourceTree = "<group>"; };
+		174A561F1A204917000FD27D /* NotePad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "NotePad@2x.png"; path = "Resources/NotePad@2x.png"; sourceTree = "<group>"; };
 		175CFA311A17E91600BF8625 /* Clouds@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Clouds@2x.png"; path = "Resources/Clouds@2x.png"; sourceTree = "<group>"; };
 		175CFA361A17E99E00BF8625 /* TimeSignature.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TimeSignature.m; path = Midi/TimeSignature.m; sourceTree = "<group>"; };
 		175CFA371A17E99E00BF8625 /* TimeSignature.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TimeSignature.h; path = Midi/TimeSignature.h; sourceTree = "<group>"; };
@@ -75,6 +89,8 @@
 		175CFA571A17EB5100BF8625 /* GrandStaffLine@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "GrandStaffLine@2x.png"; path = "Resources/GrandStaffLine@2x.png"; sourceTree = "<group>"; };
 		175CFA591A17FFBD00BF8625 /* TrebleClef@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "TrebleClef@2x.png"; path = "Resources/TrebleClef@2x.png"; sourceTree = "<group>"; };
 		175CFA5A1A17FFBD00BF8625 /* BassClef@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "BassClef@2x.png"; path = "Resources/BassClef@2x.png"; sourceTree = "<group>"; };
+		825944CF1A2EB77A007BA562 /* Pause@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Pause@2x.png"; path = "Resources/Pause@2x.png"; sourceTree = "<group>"; };
+		825944D11A3173FA007BA562 /* Play@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Play@2x.png"; path = "Resources/Play@2x.png"; sourceTree = "<group>"; };
 		82D9685A1A15C83A0060604F /* Staff Master.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Staff Master.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		82D9685E1A15C83A0060604F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		82D9685F1A15C83A0060604F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -88,7 +104,8 @@
 		82D968721A15C83A0060604F /* Staff MasterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Staff MasterTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		82D968771A15C83A0060604F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		82D968781A15C83A0060604F /* Staff_MasterTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Staff_MasterTests.m; sourceTree = "<group>"; };
-		82D9F85B1A19C7ED003318CD /* MidiFile.mid */ = {isa = PBXFileReference; lastKnownFileType = audio.midi; name = MidiFile.mid; path = Resources/MidiFile.mid; sourceTree = "<group>"; };
+		82ED50EE1A1DA76100AFCB00 /* MidiMeasure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MidiMeasure.h; path = Midi/MidiMeasure.h; sourceTree = "<group>"; };
+		82ED50EF1A1DA76100AFCB00 /* MidiMeasure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MidiMeasure.m; path = Midi/MidiMeasure.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,10 +154,12 @@
 				175CFA411A17E99E00BF8625 /* MidiFile.h */,
 				175CFA421A17E99E00BF8625 /* MidiEvent.m */,
 				175CFA431A17E99E00BF8625 /* MidiEvent.h */,
-				175CFA441A17E99E00BF8625 /* IntArray.m */,
 				175CFA451A17E99E00BF8625 /* IntArray.h */,
+				175CFA441A17E99E00BF8625 /* IntArray.m */,
 				175CFA461A17E99E00BF8625 /* Array.m */,
 				175CFA471A17E99E00BF8625 /* Array.h */,
+				82ED50EE1A1DA76100AFCB00 /* MidiMeasure.h */,
+				82ED50EF1A1DA76100AFCB00 /* MidiMeasure.m */,
 			);
 			name = Midi;
 			sourceTree = "<group>";
@@ -148,16 +167,31 @@
 		17302CFB1A16FCAD0027F60D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				82D9F85B1A19C7ED003318CD /* MidiFile.mid */,
+				174062071A327987005A464F /* Songs */,
+				1740620E1A32AEA1005A464F /* LedgerLine@2x.png */,
+				825944D11A3173FA007BA562 /* Play@2x.png */,
+				825944CF1A2EB77A007BA562 /* Pause@2x.png */,
+				174062051A21D104005A464F /* MeasureBar@2x.png */,
+				174A561F1A204917000FD27D /* NotePad@2x.png */,
+				174A561B1A204157000FD27D /* FlatNote@2x.png */,
+				174A56191A20411D000FD27D /* NaturalNote@2x.png */,
+				174A56171A204116000FD27D /* SharpNote@2x.png */,
+				174A56151A204110000FD27D /* NormalNote@2x.png */,
 				175CFA591A17FFBD00BF8625 /* TrebleClef@2x.png */,
 				175CFA5A1A17FFBD00BF8625 /* BassClef@2x.png */,
 				175CFA571A17EB5100BF8625 /* GrandStaffLine@2x.png */,
-				175CFA2E1A17E91600BF8625 /* Staff@2x.png */,
-				175CFA2F1A17E91600BF8625 /* Note@2x.png */,
-				175CFA301A17E91600BF8625 /* MidiTest.mid */,
 				175CFA311A17E91600BF8625 /* Clouds@2x.png */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		174062071A327987005A464F /* Songs */ = {
+			isa = PBXGroup;
+			children = (
+				1740620A1A327A9C005A464F /* Chopin_-_Nocturne_Op_9_No_1.mid */,
+				1740620B1A327A9C005A464F /* Field_-_Nocturne_in_B-flat_major.mid */,
+			);
+			name = Songs;
 			sourceTree = "<group>";
 		};
 		82D968511A15C8390060604F = {
@@ -303,16 +337,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				82D968681A15C83A0060604F /* GameScene.sks in Resources */,
-				175CFA321A17E91600BF8625 /* Staff@2x.png in Resources */,
 				175CFA5B1A17FFBD00BF8625 /* TrebleClef@2x.png in Resources */,
-				82D9F85C1A19C7ED003318CD /* MidiFile.mid in Resources */,
+				174062061A21D104005A464F /* MeasureBar@2x.png in Resources */,
+				1740620C1A327A9C005A464F /* Chopin_-_Nocturne_Op_9_No_1.mid in Resources */,
 				175CFA581A17EB5100BF8625 /* GrandStaffLine@2x.png in Resources */,
-				175CFA331A17E91600BF8625 /* Note@2x.png in Resources */,
+				174A56161A204110000FD27D /* NormalNote@2x.png in Resources */,
+				174A56201A204917000FD27D /* NotePad@2x.png in Resources */,
+				825944D01A2EB77A007BA562 /* Pause@2x.png in Resources */,
 				82D9686A1A15C83A0060604F /* Images.xcassets in Resources */,
+				1740620D1A327A9C005A464F /* Field_-_Nocturne_in_B-flat_major.mid in Resources */,
 				175CFA351A17E91600BF8625 /* Clouds@2x.png in Resources */,
+				174A561C1A204157000FD27D /* FlatNote@2x.png in Resources */,
+				174A56181A204116000FD27D /* SharpNote@2x.png in Resources */,
+				174A561A1A20411D000FD27D /* NaturalNote@2x.png in Resources */,
 				175CFA5C1A17FFBD00BF8625 /* BassClef@2x.png in Resources */,
+				1740620F1A32AEA1005A464F /* LedgerLine@2x.png in Resources */,
+				825944D21A3173FA007BA562 /* Play@2x.png in Resources */,
 				82D9686D1A15C83A0060604F /* MainMenu.xib in Resources */,
-				175CFA341A17E91600BF8625 /* MidiTest.mid in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -341,6 +382,7 @@
 				175CFA481A17E99E00BF8625 /* TimeSignature.m in Sources */,
 				175CFA551A17E9AD00BF8625 /* MIDIUtility.m in Sources */,
 				175CFA4E1A17E99E00BF8625 /* MidiEvent.m in Sources */,
+				82ED50F01A1DA76100AFCB00 /* MidiMeasure.m in Sources */,
 				175CFA501A17E99E00BF8625 /* Array.m in Sources */,
 				175CFA4B1A17E99E00BF8625 /* MidiFileReader.m in Sources */,
 				175CFA4A1A17E99E00BF8625 /* MidiNote.m in Sources */,

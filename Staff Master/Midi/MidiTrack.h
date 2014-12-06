@@ -19,30 +19,28 @@
 #import "Array.h"
 #import "TimeSignature.h"
 #import "MidiNote.h"
-
+#import "MidiMeasure.h"
 int sortbynote(void* note1, void* note2);
 int sortbytime(void* note1, void* note2);
 
-@interface MidiTrack : NSObject <NSCopying> {
+@interface MidiTrack : NSObject{
     int number;            /** The track number */
     Array* notes;          /** Array of Midi notes */
+    NSMutableArray* measures;
     int instrument;        /** Instrument for this track */
     Array* lyrics;         /** The lyrics in this track */
 }
 
 @property (nonatomic, assign) int number;
 @property (nonatomic, readonly) Array *notes;
+@property (nonatomic, readonly) NSMutableArray *measures;
 @property (nonatomic, assign) int instrument;
 @property (nonatomic, retain) Array *lyrics;
 
--(id)initWithTrack:(int)tracknum;
--(id)initWithEvents:(Array*)events andTrack:(int)tracknum;
--(NSString*)instrumentName;
+-(id)initWithEvents:(Array*)events andTrack:(int)tracknum andKey:(int)keySignature andPPUS:(float)ppus andTempo:(int)tempo andNumerator:(int)numer;
 -(void)addNote:(MidiNote *)m;
 -(void)noteOffWithChannel:(int)channel andNumber:(int)num andTime:(int)endtime;
--(void)addLyric:(MidiEvent *)mevent;
--(id)copyWithZone:(NSZone *)zone;
+-(bool)decideToShowAccidental:(MidiMeasure*)measure withNote:(MidiNote*)currentNote;
 
--(void)setTimeWithPPUS:(double)ppus andTotalPulses:(int) totalPulses;
 @end
 
